@@ -1,0 +1,120 @@
+Mini Tienda con Carrito de Compras
+Manipulación del DOM · Eventos · Bootstrap 5
+Modalidad Individual
+Tecnologías HTML · CSS · JavaScript · Bootstrap 5
+Prerrequisito Clase de Manipulación del DOM
+Entrega Al finalizar la sesión de laboratorio
+Contexto del Laboratorio
+En este laboratorio construirás desde cero una mini tienda en línea con carrito de compras funcional. Usarás
+HTML para la estructura, Bootstrap para el diseño visual y JavaScript para hacer que todo cobre vida al
+interactuar con el DOM.
+Al finalizar tendrás una página donde el usuario puede agregar productos al carrito, eliminarlos individualmente,
+ver el total actualizado y vaciar el carrito — todo sin recargar la página.
+Herramientas de JavaScript que vas a usar
+· querySelector / querySelectorAll — Seleccionar elementos del DOM
+· addEventListener('click', ...) — Detectar cuando el usuario hace clic
+· createElement / appendChild — Crear nuevos elementos y agregarlos al DOM
+· textContent — Cambiar el texto visible de un elemento
+· element.remove() — Eliminar un elemento del DOM
+· dataset — Leer datos guardados en atributos data- del HTML
+· forEach — Recorrer una lista de elementos y hacer algo con cada uno
+Estructura esperada del proyecto
+Tu proyecto debe tener estos tres archivos en la misma carpeta. No hay código base: comienza desde cero.
+Archivo Descripción
+index.html Toda la estructura HTML: navbar, productos y carrito
+style.css Estilos extras (Bootstrap se carga por CDN)
+app.js Toda la lógica JavaScript del carrito
+© 2026 Ana Alvarado · Educadora Tech & Desarrolladora Full Stack · Todos los derechos reservados. | linkedin.com/in/ana-alvarado-instructora-full-stackPág. 2
+n Bootstrap vía CDN: Incluye este enlace en el <head> de tu HTML:
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+Tareas
+Trabaja en orden. Cada tarea depende de la anterior. Lee bien antes de escribir código.
+0
+1 Estructura HTML y visual HTML · Bootstrap
+n Crea el archivo index.html con la estructura base de Bootstrap.
+n Agrega un navbar con el nombre de tu tienda y un badge con id="badge" que muestre el número 0 al inicio.
+n Escribe las 4 cards de productos directamente en el HTML usando el grid de Bootstrap. Cada card debe tener:
+nombre, precio, y un botón con la clase btn-agregar, un atributo data-nombre y un atributo data-precio.
+n Agrega la sección del carrito con: un <ul> con id="lista-carrito", un <span> con id="total" y un botón con
+id="btn-vaciar".
+n Vincula tu style.css en el <head> y tu app.js antes del </body>.
+n Los IDs en el HTML deben coincidir exactamente con los que uses en querySelector.
+Puntuación: 20 puntos
+0
+2 Agregar productos al carrito JavaScript · DOM
+n En app.js, usa querySelectorAll('.btn-agregar') para seleccionar todos los botones de agregar.
+n Con un forEach, agrega un addEventListener('click') a cada botón.
+n Dentro del evento, lee el nombre y precio del producto usando boton.dataset.nombre y boton.dataset.precio.
+n Crea una función agregarAlCarrito(nombre, precio) que use createElement para crear un <li> con el nombre,
+precio y un botón de eliminar (5), y lo agregue al carrito con appendChild.
+n Primero haz que aparezca el en la lista. Luego te preocupas por el total.
+Puntuación: 25 puntos
+0
+3 Contador en el navbar JavaScript · DOM
+n Declara una variable cantidadItems = 0 al inicio de tu archivo JS.
+n Cada vez que se agrega un producto, incrementa esa variable en 1.
+n Crea una función updateBadge() que actualice el textContent del badge con el valor de esa variable.
+© 2026 Ana Alvarado · Educadora Tech & Desarrolladora Full Stack · Todos los derechos reservados. | linkedin.com/in/ana-alvarado-instructora-full-stackPág. 3
+n Llama a updateBadge() dentro de agregarAlCarrito() y también cada vez que se elimine un ítem.
+n Una variable sencilla como cantidadItems++ es suficiente. No necesitas contar los .
+Puntuación: 15 puntos
+0
+4 Eliminar productos del carrito JavaScript · DOM
+n Dentro de agregarAlCarrito(), selecciona el botón 5 del <li> que acabas de crear con
+li.querySelector('.btn-eliminar').
+n Agrégale un addEventListener('click') que llame a una función eliminarItem(li, precio).
+n La función eliminarItem() debe: llamar a li.remove(), restar el precio del total acumulado, restar 1 a
+cantidadItems, y llamar a updateTotal() y updateBadge().
+n El addEventListener del botón 5 se agrega justo después del appendChild del li.
+Puntuación: 20 puntos
+0
+5 Total dinámico JavaScript · DOM
+n Declara una variable totalAcumulado = 0 al inicio de tu archivo JS.
+n Cada vez que se agrega un producto, suma su precio a esa variable.
+n Crea una función updateTotal() que actualice el textContent del span#total con el valor formateado de
+totalAcumulado.
+n Llama a updateTotal() dentro de agregarAlCarrito() y dentro de eliminarItem().
+n Para formatear: '$' + totalAcumulado.toLocaleString('es-CR', {minimumFractionDigits: 2})
+Puntuación: 20 puntos
+H Tarea Extra — Vaciar el carrito Desafío adicional
+n Agrega un addEventListener('click') al botón#btn-vaciar.
+n Al hacer clic, elimina todos los <li> del carrito del DOM con querySelectorAll y un forEach con .remove().
+n Reinicia totalAcumulado = 0 y cantidadItems = 0.
+n Llama a updateTotal() y updateBadge() para actualizar la UI.
+n Muestra el mensaje 'Tu carrito está vacío' cambiando su display a 'block'.
+n Para eliminar todos los ítems: lista.querySelectorAll('li:not(#msg-vacio)').forEach(li => li.remove())
+Puntuación: 10 puntos bonus
+© 2026 Ana Alvarado · Educadora Tech & Desarrolladora Full Stack · Todos los derechos reservados. | linkedin.com/in/ana-alvarado-instructora-full-stackPág. 4
+Criterios de Evaluación
+Tarea Descripción Pts.
+Tarea 1 Estructura HTML + Bootstrap — navbar con badge, 4 cards, sección carrito 20
+Tarea 2 Función agregar: crea en el DOM con nombre, precio y botón 5 25
+Tarea 3 Badge del navbar se actualiza con cada agregar y eliminar 15
+Tarea 4 Botón 5 elimina el del DOM y recalcula total y badge 20
+Tarea 5 Total se recalcula y muestra correctamente con cada cambio 20
+T. Extra Botón Vaciar: limpia todo el DOM, reinicia total y badge +10
+TOTAL 100
+nn Importante: El código debe funcionar en el navegador sin recargar la página. Se revisará que los cambios en el
+DOM sean visibles en tiempo real. Errores en la consola que rompan la funcionalidad afectarán la puntuación.
+Checklist antes de entregar
+HTML & Bootstrap
+n Navbar con badge visible (inicia en 0)
+n 4 cards de productos con data-nombre y data-precio
+n Sección del carrito con , mensaje vacío, total y botón vaciar
+JavaScript
+n querySelectorAll('.btn-agregar') selecciona todos los botones
+n forEach agrega un addEventListener a cada botón
+n Función agregarAlCarrito() crea y agrega el al DOM
+n Función eliminarItem() remueve el del DOM
+n Funciones updateBadge() y updateTotal() actualizan la UI
+DOM
+n Ítems se agregan al carrito sin recargar la página
+n Cada ítem tiene su propio botón 5 funcional
+n Badge y total reflejan el estado real del carrito
+n Mensaje 'Tu carrito está vacío' aparece cuando corresponde
+Código
+n Sin errores en la consola del navegador
+© 2026 Ana Alvarado · Educadora Tech & Desarrolladora Full Stack · Todos los derechos reservados. | linkedin.com/in/ana-alvarado-instructora-full-stackPág. 5
+n Archivos HTML, CSS y JS separados y vinculados correctamente
+n Código indentado y con comentarios básicos
