@@ -45,7 +45,7 @@
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     
                     <!-- Producto 1 -->
-                    <div class="col">
+                    <div class="col_1">
                         <article class="card h-100 shadow-sm border-0">
                             <img src="./portatil.jpg" class="card-img-top p-3 bg-white object-fit-contain" alt="Imagen de portatil" style="height: 200px;">
                             <div class="card-body d-flex flex-column justify-content-between">
@@ -53,7 +53,7 @@
                                     <h5 class="card-title fw-bold">Portátil de Estudio</h5>
                                     <p class="card-text text-success fs-5 fw-semibold">$5.000.000 COP</p>
                                 </div>
-                                <button class="btn btn-primary w-100 mt-3" onclick="agregarAlCarrito('Portátil de Estudio', 500000)">
+                                <button class=".btn-agregar" onclick="agregarAlCarrito('Portátil de Estudio', 500000)">
                                     Agregar al carrito
                                 </button>
                             </div>
@@ -61,7 +61,7 @@
                     </div>
 
                     <!-- Producto 2 -->
-                    <div class="col">
+                    <div class="col_2">
                         <article class="card h-100 shadow-sm border-0">
                             <img src="./tableta.jpg" class="card-img-top p-3 bg-white object-fit-contain" alt="Imagen de tableta" style="height: 200px;">
                             <div class="card-body d-flex flex-column justify-content-between">
@@ -69,7 +69,7 @@
                                     <h5 class="card-title fw-bold">Tableta Digital</h5>
                                     <p class="card-text text-success fs-5 fw-semibold">$3.000.000 COP</p>
                                 </div>
-                                <button class="btn btn-primary w-100 mt-3" onclick="agregarAlCarrito('Tableta Digital', 300000)">
+                                <button class=".btn-agregar" onclick="agregarAlCarrito('Tableta Digital', 300000)">
                                     Agregar al carrito
                                 </button>
                             </div>
@@ -77,7 +77,7 @@
                     </div>
 
                     <!-- Producto 3 -->
-                    <div class="col">
+                    <div class="col_3">
                         <article class="card h-100 shadow-sm border-0">
                             <img src="./tel.jpg" class="card-img-top p-3 bg-white object-fit-contain" alt="Imagen telefono celular" style="height: 200px;">
                             <div class="card-body d-flex flex-column justify-content-between">
@@ -85,7 +85,7 @@
                                     <h5 class="card-title fw-bold">Teléfono Celular</h5>
                                     <p class="card-text text-success fs-5 fw-semibold">$2.000.000 COP</p>
                                 </div>
-                                <button class="btn btn-primary w-100 mt-3" onclick="agregarAlCarrito('Teléfono Celular', 200000)">
+                                <button class=".btn-agregar" onclick="agregarAlCarrito('Teléfono Celular', 200000)">
                                     Agregar al carrito
                                 </button>
                             </div>
@@ -104,6 +104,10 @@
                         <!-- Lista dinámica -->
                         <div id="lista-carrito" class="mb-4 text-muted" style="min-height: 100px;">
                             <p class="text-center my-4">El carrito está vacío</p>
+                            <ul>
+                                <li></li>
+                            </ul>
+                            <button class="btn-eliminar" onclick="eliminar()">Eliminar</button>
                         </div>
                         
                         <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-4">
@@ -121,46 +125,6 @@
         </div>
     </main>
 
-    <!-- JavaScript de Bootstrap y lógica del carrito -->
-    <script src="https://jsdelivr.net"></script>
-    <script>
-        let carrito = [];
-        let total = 0;
-
-        function agregarAlCarrito(nombre, precio) {
-            carrito.push({ nombre, precio });
-            total += precio;
-            actualizarCarrito();
-        }
-
-        function actualizarCarrito() {
-            let lista = document.getElementById('lista-carrito');
-            if (carrito.length === 0) {
-                lista.innerHTML = '<p class="text-center my-4">El carrito está vacío</p>';
-            } else {
-                lista.innerHTML = '<ul class="list-group list-group-flush">';
-                carrito.forEach((item, index) => {
-                    lista.innerHTML += `
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent px-0 py-2">
-                            <span>${item.nombre}</span>
-                            <span class="badge bg-secondary rounded-pill">$${item.precio.toLocaleString()} COP</span>
-                        </li>`;
-                });
-                lista.innerHTML += '</ul>';
-            }
-            document.getElementById('total-carrito').innerText = `$${total.toLocaleString()} COP`;
-        }
-
-        function procesarCompra() {
-            if (carrito.length === 0) {
-                alert("El carrito está vacío.");
-            } else {
-                alert(`¡Compra finalizada con éxito por un total de $${total.toLocaleString()} COP!`);
-                carrito = [];
-                total = 0;
-                actualizarCarrito();
-            }
-        }
-    </script>
+    <script>codigo.js</script>
 </body>
 </html>
